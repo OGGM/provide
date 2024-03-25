@@ -1,0 +1,379 @@
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+RGI Region: P07
+Workdir for this run: /work/pschmitt/424704/wd
+INFO:    gocryptfs not found, will not be able to use gocryptfs
+Requirement already satisfied: pip in /work/pschmitt/424704/wd/oggm_env/lib/python3.11/site-packages (23.2.1)
+Collecting pip
+  Obtaining dependency information for pip from https://files.pythonhosted.org/packages/8a/6a/19e9fe04fca059ccf770861c7d5721ab4c2aebc539889e97c7977528a53b/pip-24.0-py3-none-any.whl.metadata
+  Downloading pip-24.0-py3-none-any.whl.metadata (3.6 kB)
+Requirement already satisfied: setuptools in /work/pschmitt/424704/wd/oggm_env/lib/python3.11/site-packages (65.5.0)
+Collecting setuptools
+  Obtaining dependency information for setuptools from https://files.pythonhosted.org/packages/55/3a/5121b58b578a598b269537e09a316ad2a94fdd561a2c6eb75cd68578cc6b/setuptools-69.0.3-py3-none-any.whl.metadata
+  Downloading setuptools-69.0.3-py3-none-any.whl.metadata (6.3 kB)
+Downloading pip-24.0-py3-none-any.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 22.8 MB/s eta 0:00:00
+Downloading setuptools-69.0.3-py3-none-any.whl (819 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 819.5/819.5 kB 98.6 MB/s eta 0:00:00
+Installing collected packages: setuptools, pip
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 65.5.0
+    Uninstalling setuptools-65.5.0:
+      Successfully uninstalled setuptools-65.5.0
+  Attempting uninstall: pip
+    Found existing installation: pip 23.2.1
+    Uninstalling pip-23.2.1:
+      Successfully uninstalled pip-23.2.1
+Successfully installed pip-24.0 setuptools-69.0.3
+Collecting git+https://github.com/OGGM/oggm.git@7665516f3f15a6fdec0aab1d3fe180fef99dfae8
+  Cloning https://github.com/OGGM/oggm.git (to revision 7665516f3f15a6fdec0aab1d3fe180fef99dfae8) to /tmp/pip-req-build-qnp7butc
+  Running command git clone --filter=blob:none --quiet https://github.com/OGGM/oggm.git /tmp/pip-req-build-qnp7butc
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+  Running command git rev-parse -q --verify 'sha^7665516f3f15a6fdec0aab1d3fe180fef99dfae8'
+  Running command git fetch -q https://github.com/OGGM/oggm.git 7665516f3f15a6fdec0aab1d3fe180fef99dfae8
+  Running command git checkout -q 7665516f3f15a6fdec0aab1d3fe180fef99dfae8
+  Resolved https://github.com/OGGM/oggm.git to commit 7665516f3f15a6fdec0aab1d3fe180fef99dfae8
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: oggm
+  Building wheel for oggm (pyproject.toml): started
+  Building wheel for oggm (pyproject.toml): finished with status 'done'
+  Created wheel for oggm: filename=oggm-1.6.1-py2.py3-none-any.whl size=418750 sha256=fda78475d8d4cdff977b0e68dd5fc718d0bcd522ab7f263e6edffe5bc39505ac
+  Stored in directory: /work/pschmitt/424704/wd/fake_home/.cache/pip/wheels/4d/7c/22/c4b863aa4b09abd262103e236bb1947044a7583031e4893e3b
+Successfully built oggm
+Installing collected packages: oggm
+  Attempting uninstall: oggm
+    Found existing installation: oggm 1.6.2.dev25+g5313d54
+    Not uninstalling oggm at /usr/local/pyenv/versions/3.11.7/lib/python3.11/site-packages, outside environment /work/pschmitt/424704/wd/oggm_env
+    Can't uninstall 'oggm'. No files were found to uninstall.
+Successfully installed oggm-1.6.1
+Start region P07 for all.
+batch 0_500
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 1000_1500
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 1500_2000
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 2000_2500
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 2500_3000
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 3000_3500
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 3500_4000
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 500_1000
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+Time needed for all gcms 1790.5 s
+
+Start region P07 without IPSL.
+batch 0_500
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 1000_1500
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 1500_2000
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 2000_2500
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 2500_3000
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 3000_3500
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 3500_4000
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+batch 500_1000
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+slurmstepd: error: _get_joules_task: can't get info from slurmd
+Time needed without IPSL 1244.4 s
+SLURM DONE
+slurmstepd: error: _get_joules_task: can't get info from slurmd
