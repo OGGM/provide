@@ -1,0 +1,8 @@
+__pycache__
+
+# Notebook stuff
+.ipynb_checkpoints
+
+# do not include aggregated data to github
+countries/resolution_1_deg/aggregated_data
+countries/resolution_2_5_deg/aggregated_data
