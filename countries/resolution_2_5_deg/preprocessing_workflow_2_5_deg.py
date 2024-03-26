@@ -21,6 +21,8 @@ from oggm import utils
 import time
 import geopandas as gpd
 import pandas as pd
+import xarray as xr
+import numpy as np
 import matplotlib.pyplot as plt
 import json
 from shapely.geometry import Point
@@ -233,3 +235,96 @@ if not is_notebook:
         json.dump(countries_with_no_glaciers, outfile)
 
     print(f'Time needed for {resolution}°: {time.time() - start_time:.1f} s\n\n')
+
+# # Tests after running on cluster
+
+# ## check for missing glaciers
+
+if is_notebook:
+    final_filepath = os.path.join(preprocess_country_dict_outpath,
+                                  "preprocessed_country_grids.json")
+
+    with open(final_filepath, 'r') as f:
+        dict_final_grids = json.load(f)
+
+    # check that all rgi_ids are assigned to a geometry
+    def flatten_ds_var(ds_var):
+        if isinstance(ds_var, xr.core.dataarray.DataArray):
+            nested_list = ds_var.values.tolist()
+        else:
+            nested_list = ds_var
+        # The flattened list to be returned
+        flattened = []
+        for item in nested_list:
+            if item is None:
+                continue  # Skip None values
+            elif isinstance(item, list):
+                # If the item is a list, recursive call
+                flattened.extend(flatten_ds_var(item))
+            else:
+                # If the item is not a list, add it to the flattened list
+                flattened.append(item)
+        return flattened
+
+    assigned_rgi_ids = []
+    for key in dict_final_grids:
+        try:
+            ds_tmp = open_grid_from_dict(dict_final_grids[key])
+            assigned_rgi_ids.extend(flatten_ds_var(ds_tmp.rgi_ids))
+        except ValueError:
+            print(key)
+
+    given_rgi_ids = list(dict_rgis_to_batch.keys())
+
+    assert len(given_rgi_ids) == len(np.unique(given_rgi_ids))
+    assert len(assigned_rgi_ids) == len(np.unique(assigned_rgi_ids))
+    print(f'Given rgi_ids: {len(given_rgi_ids)}')
+    print(f'Assigned rgi_ids: {len(assigned_rgi_ids)}')
+    print(f'Diff: {len(given_rgi_ids) - len(assigned_rgi_ids)}')
+    
+    # plot missing glaciers on map
+    fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+    gdf_countries.plot(ax=ax, color='blue', edgecolor='black', linewidth=1,
+                       alpha=0.5)
+    gdf_missing_rgi_ids = gdf_rgi_ids[~gdf_rgi_ids.index.isin(assigned_rgi_ids)]
+    if len(gdf_missing_rgi_ids) != 0:
+        gdf_missing_rgi_ids.plot(ax=ax, color='red', markersize=2)
+    ax.set_title(f'Glaciers not attributed to a country '
+                 f'(Missing nr. {len(given_rgi_ids) - len(assigned_rgi_ids)})') 
+    plt.show()
+
+# ## check for uniqueness of rgi_ids in batches
+
+if is_notebook:
+    # check uniqueness of rgi_ids in batches
+    for key in dict_final_grids:
+        ds_tmp = open_grid_from_dict(dict_final_grids[key])
+        raw_rgi_id_batch_list = []
+        for batch in ds_tmp.result_batches:
+            raw_rgi_id_batch_list.extend(ds_tmp.result_batches[batch])
+
+        assert len(raw_rgi_id_batch_list) == len(np.unique(raw_rgi_id_batch_list))
+
+# ## check that countries with glaciers and countries with no glaciers add up to total number
+
+if is_notebook:
+    countries_with_glaciers_filepath = os.path.join(
+        preprocess_country_dict_outpath,"preprocessed_country_grids.json"
+    )
+    with open(countries_with_glaciers_filepath, 'r') as f:
+        countries_with_glaciers = json.load(f)
+
+    countries_with_no_glaciers_filepath = os.path.join(
+        aggregated_data_outpath, "countries_with_no_glaciers.json"
+    )
+    with open(countries_with_no_glaciers_filepath, 'r') as f:
+        countries_with_no_glaciers = json.load(f)
+
+    total_nr_of_countries = len(gdf_countries)
+    assigned_countries = (countries_with_no_glaciers + 
+                          list(countries_with_glaciers.keys()))
+
+    assert len(np.unique(assigned_countries)) == total_nr_of_countries
+
+    print(f'Countries with glaciers: {len(list(countries_with_glaciers.keys()))}')
+    print(f'Countries without glaciers: {len(countries_with_no_glaciers)}')
