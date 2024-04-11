@@ -13,6 +13,12 @@
 #     name: conda-env-oggm_env-py
 # ---
 
+# # Imports
+
+import os
+import shutil
+
+
 # # Notebook or script?
 #
 # If we developing or debugging the code in the notebook we use the is_notebook, if executed as a script on the cluster we ignore everything related to is_notebook.
@@ -35,3 +41,27 @@ def check_if_notebook():
         return False      # Not in IPython, likely standard Python interpreter
 
 
+# # # mkdir adapted from OGGM utils
+
+def mkdir(path, reset=False):
+    """Checks if directory exists and if not, create one.
+
+    Parameters
+    ----------
+    reset: erase the content of the directory if exists
+
+    Returns
+    -------
+    the path
+    """
+
+    if reset and os.path.exists(path):
+        shutil.rmtree(path)
+        # deleting stuff takes time
+        while os.path.exists(path):  # check if it still exists
+            pass
+    try:
+        os.makedirs(path)
+    except FileExistsError:
+        pass
+    return path
