@@ -229,6 +229,11 @@ if is_notebook:
 if is_notebook:
 
     #test_region = 'P07'
+    total_all_area = 0
+    total_all_nr = 0
+    total_call_area = 0
+    total_call_nr = 0
+
     for test_region in provide_regions:
         file_all = f"commonly_running_glaciers_all_{test_region}.json"
         file_without_IPSL = f"commonly_running_glaciers_without_IPSL_{test_region}.json"
@@ -264,3 +269,17 @@ if is_notebook:
         print(f'      ALL - CALL: '
               f'{df_rgi.loc[rgi_ids_region_all].Area.sum() - df_rgi.loc[rgi_ids_all_test].Area.sum():.1f}'
               f' km2')  
+
+        total_all_area += all_area
+        total_all_nr += len(rgi_ids_region_all)
+        total_call_area += call_area
+        total_call_nr += len(rgi_ids_all_test)
+
+    print()
+    print('Total over all regions:')
+    print(f'  ALL nr RGI-IDS: {total_all_nr}')
+    print(f' CAll nr RGI-IDS: {total_call_nr} ({100 / total_all_nr * total_call_nr:.1f} %)')
+    print(f'        ALL area: {total_all_area:.1f} km2, {100 / total_all_area * total_all_area:.1f} %')
+    print(f'       CAll area: {total_call_area:.1f} km2, {100 / total_all_area * total_call_area:.3f} %')
+
+
