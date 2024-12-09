@@ -73,7 +73,7 @@ def plot_scenario_results_country(country_name, scenario, input_folder, output_f
     mkdir(plot_output_folder)
     country = gdf_countries[gdf_countries[name_col_countries] == country_name]
 
-    plot_map(country, country_name, scenario, input_folder, figsize=(12, 7),
+    plot_map(country, country_name, scenario, input_folder, figsize=(12, 12),
              save_plot=plot_output_folder)
 
     plot_timeseries(country_name, scenario, input_folder, figsize=(5, 9),
@@ -96,7 +96,7 @@ if is_notebook:
     test_output_folder = 'aggregated_result_plots_test'
     mkdir(test_output_folder)
 
-    test_country = 'SVN'
+    test_country = 'ISL'
     test_scenario = scenarios_mesmer[0]
 
     plot_scenario_results_country(test_country, test_scenario,

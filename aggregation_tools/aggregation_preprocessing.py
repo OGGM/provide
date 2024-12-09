@@ -9,7 +9,9 @@ import matplotlib.pyplot as plt
 import json
 
 
-def assign_rgi_ids_to_target_shapes(gdf_rgi_ids, target_shapes, name_col_target, do_plot=False):
+def assign_rgi_ids_to_target_shapes(gdf_rgi_ids, target_shapes, name_col_target, do_plot=False,
+                                    assign_all=True
+                                   ):
     """ Assign rgi_is to target shapes for more efficient aggregation of data.
     
     Takes geopandas dataframe gdf_rgi_ids and assigns all containing glaciers to the provided
@@ -18,7 +20,7 @@ def assign_rgi_ids_to_target_shapes(gdf_rgi_ids, target_shapes, name_col_target,
     dictionary.
 
     In a first round all rgi_ids which are intersecting with a target_shape are assigned. In
-    a second round the rest is assigned depending on the shortest distance to the target shapes.
+    a second (optional) round the rest is assigned depending on the shortest distance to the target shapes.
     If setting do_plot to True a plot for these glaciers assinged in the second round is shown.
     """
     # first assign all rgi_ids which are in target shapes
@@ -28,47 +30,48 @@ def assign_rgi_ids_to_target_shapes(gdf_rgi_ids, target_shapes, name_col_target,
     dict_target_to_rgis = sjoin_country_rgi.groupby(
         name_col_target).apply(lambda x: list(x.index)).to_dict()
 
-    # now check if we have some missing rgi ids outside of target shapes
-    missing_rgi_ids = gdf_rgi_ids.index.difference(sjoin_country_rgi.index)
-
-    if len(missing_rgi_ids) == 0:
-        # nothing missing, we are done
-        return dict_target_to_rgis
-    else:
-        # ok we need to assign missing to closest target geometries
-        # for this we use a projection which preserves distances
-        gdf_missing_rgi_ids = gdf_rgi_ids.loc[missing_rgi_ids].to_crs(epsg=4087)
-        target_shapes = target_shapes.to_crs(epsg=4087)
-
-        def find_closest_polygon_name(point, polygons, name_col):
-            distances = polygons.geometry.distance(point)
-            closest_polygon_idx = distances.idxmin()
-            return polygons.loc[closest_polygon_idx, name_col]
-
-        # Apply the function to each point
-        gdf_missing_rgi_ids['closest_target_name'] = gdf_missing_rgi_ids.geometry.apply(
-            find_closest_polygon_name, args=(target_shapes, name_col_target))
-
-        if do_plot:
-            gdf_missing_rgi_ids.plot(column='closest_target_name', legend=True)
-
-        # add to existing dictionary
-        dict_missing_rgi_ids = gdf_missing_rgi_ids.groupby('closest_target_name').apply(
-            lambda x: list(x.index)).to_dict()
-        for target, rgi_ids in dict_missing_rgi_ids.items():
-            if target in dict_target_to_rgis:
-                dict_target_to_rgis[target].extend(rgi_ids)
-            else:
-                dict_target_to_rgis[target] = rgi_ids
-
-        # test if everything is assigned
-        assigned_rgi_ids = []
-        for target, rgi_ids in dict_target_to_rgis.items():
-            assigned_rgi_ids.extend(rgi_ids)
-        assert len(assigned_rgi_ids) == len(np.unique(assigned_rgi_ids))
-        assert len(assigned_rgi_ids) == len(gdf_rgi_ids)
-
-        return dict_target_to_rgis
+    if assign_all:
+        # now check if we have some missing rgi ids outside of target shapes
+        missing_rgi_ids = gdf_rgi_ids.index.difference(sjoin_country_rgi.index)
+    
+        if len(missing_rgi_ids) == 0:
+            # nothing missing, we are done
+            return dict_target_to_rgis
+        else:
+            # ok we need to assign missing to closest target geometries
+            # for this we use a projection which preserves distances
+            gdf_missing_rgi_ids = gdf_rgi_ids.loc[missing_rgi_ids].to_crs(epsg=4087)
+            target_shapes = target_shapes.to_crs(epsg=4087)
+    
+            def find_closest_polygon_name(point, polygons, name_col):
+                distances = polygons.geometry.distance(point)
+                closest_polygon_idx = distances.idxmin()
+                return polygons.loc[closest_polygon_idx, name_col]
+    
+            # Apply the function to each point
+            gdf_missing_rgi_ids['closest_target_name'] = gdf_missing_rgi_ids.geometry.apply(
+                find_closest_polygon_name, args=(target_shapes, name_col_target))
+    
+            if do_plot:
+                gdf_missing_rgi_ids.plot(column='closest_target_name', legend=True)
+    
+            # add to existing dictionary
+            dict_missing_rgi_ids = gdf_missing_rgi_ids.groupby('closest_target_name').apply(
+                lambda x: list(x.index)).to_dict()
+            for target, rgi_ids in dict_missing_rgi_ids.items():
+                if target in dict_target_to_rgis:
+                    dict_target_to_rgis[target].extend(rgi_ids)
+                else:
+                    dict_target_to_rgis[target] = rgi_ids
+    
+            # test if everything is assigned
+            assigned_rgi_ids = []
+            for target, rgi_ids in dict_target_to_rgis.items():
+                assigned_rgi_ids.extend(rgi_ids)
+            assert len(assigned_rgi_ids) == len(np.unique(assigned_rgi_ids))
+            assert len(assigned_rgi_ids) == len(gdf_rgi_ids)
+            
+    return dict_target_to_rgis
 
 
 def generate_global_coordinates(resolution):

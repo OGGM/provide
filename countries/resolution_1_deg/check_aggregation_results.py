@@ -73,7 +73,7 @@ def plot_scenario_results_country(country_name, scenario, input_folder, output_f
     mkdir(plot_output_folder)
     country = gdf_countries[gdf_countries[name_col_countries] == country_name]
 
-    plot_map(country, country_name, scenario, input_folder, figsize=(12, 7),
+    plot_map(country, country_name, scenario, input_folder, figsize=(12, 12),
              save_plot=plot_output_folder)
 
     plot_timeseries(country_name, scenario, input_folder, figsize=(5, 9),
@@ -92,12 +92,11 @@ def plot_unavoidable_risk_for_all_scenarios(country_name, scenarios, input_folde
 
 # ## testing in notebook
 
-# + jupyter={"outputs_hidden": true}
 if is_notebook:
     test_output_folder = 'aggregated_result_plots_test'
     mkdir(test_output_folder)
 
-    test_country = 'AUT'
+    test_country = 'ISL'
     test_scenario = scenarios_mesmer[0]
 
     plot_scenario_results_country(test_country, test_scenario,
@@ -105,7 +104,6 @@ if is_notebook:
 
     plot_unavoidable_risk_for_all_scenarios(test_country, scenarios_mesmer,
                                             input_folder, test_output_folder)
-# -
 
 # ## code for cluster
 
@@ -136,7 +134,7 @@ if is_notebook:
         path_country = os.path.join(output_folder,
                                     country)
         nr_files_country = len([file for file in os.listdir(path_country)
-                                if os.path.isfile(file)])
+                                if os.path.isfile(os.path.join(path_country,file))])
         if nr_files_ref is None:
             nr_files_ref = nr_files_country
         elif nr_files_ref != nr_files_country:
@@ -148,15 +146,16 @@ if is_notebook:
 
 if is_notebook:
     # same ref values for each scenario?
-    for country in country_structure_dict:
-        print(f'Checking ref values {country}')
+    for region in country_structure_dict:
+        print(f'Checking ref values {region}')
         ref_volume = None
         ref_area = None
+        ref_runoff = None
         for scenario in scenarios_mesmer:
             with xr.open_dataset(
                 os.path.join(input_folder,
-                             country,
-                             f'{country}_{scenario}_timeseries.nc')) as ds_time:
+                             region,
+                             f'{region}_{scenario}_timeseries.nc')) as ds_time:
                 if ref_volume is None:
                     ref_volume = ds_time.volume.reference_2020_km3
                 else:
@@ -165,7 +164,7 @@ if is_notebook:
                                       #rtol=0.01,
                                       #atol=30
                                      ):
-                        print(f'{country}/{scenario}: volume NOT close to reference '
+                        print(f'{region}/{scenario}: volume NOT close to reference '
                               f'(given {ds_time.volume.reference_2020_km3:.1f}, '
                               f'reference {ref_volume:.1f})')
 
@@ -177,26 +176,38 @@ if is_notebook:
                                       #rtol=0.01,
                                       #atol=80
                                      ):
-                        print(f'{country}/{scenario}: area NOT close to reference '
+                        print(f'{region}/{scenario}: area NOT close to reference '
                               f'(given {ds_time.area.reference_2020_km2:.1f}, '
                               f'reference {ref_area:.1f})')
 
+                if ref_runoff is None:
+                    ref_runoff = ds_time.runoff.reference_2000_2019_Mt_per_yer
+                else:
+                    if not np.isclose(ds_time.runoff.reference_2000_2019_Mt_per_yer,
+                                      ref_runoff,
+                                      #rtol=0.01,
+                                      #atol=80
+                                     ):
+                        print(f'{region}/{scenario}: runoff NOT close to reference '
+                              f'(given {ds_time.runoff.reference_2000_2019_Mt_per_yer:.1f}, '
+                              f'reference {ref_runoff:.1f})')
+
     # are map values 2020 add up to 100%
-    for country in country_structure_dict:
-        print(f'Checking map sum 2020 for {country}')
+    for region in country_structure_dict:
+        print(f'Checking map sum 2020 for {region}')
         for scenario in scenarios_mesmer:
             with xr.open_dataset(
                         os.path.join(input_folder,
-                                     country,
-                                     f'{country}_{scenario}_map.nc')) as ds_map:
+                                     region,
+                                     f'{region}_{scenario}_map.nc')) as ds_map:
                 for var in ['volume', 'area']:
                     for quant in ds_map['quantile']:
-                        map_sum = ds_map.loc[{'time': 2020, 'quantile':quant}]['volume'].sum().values
+                        map_sum = ds_map.loc[{'time': 2020, 'quantile':quant}][var].sum().values
                         if not np.isclose(map_sum, 100):
                             if np.isclose(map_sum, 0):
-                                print(f'  {country} is 0 ({scenario}, {var}, {quant.values})')
+                                print(f'  {region} is 0 ({scenario}, {var}, {quant.values})')
                             else:
                                 print(f'Map 2020 adds not up to 100, only {map_sum} '
-                                      f'({country}, {scenario}, {var}, {quant.values})')
+                                      f'({region}, {scenario}, {var}, {quant.values})')
 
 

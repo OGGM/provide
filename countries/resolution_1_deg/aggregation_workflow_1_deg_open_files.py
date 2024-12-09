@@ -130,7 +130,7 @@ if is_notebook:
 # ## test aggregation
 
 if is_notebook:
-    for test_scenario in scenarios_mesmer[:2]:
+    for test_scenario in scenarios_mesmer[:1]:
         open_files_and_aggregate_on_map(
             target_name=test_country_name,
             target_structure_dict=country_structure_dict,
@@ -139,15 +139,15 @@ if is_notebook:
             oggm_result_dir=oggm_result_dir,
             raw_oggm_output_file=raw_oggm_output_file,
             intermediate_data_folder=None,
-            variables=['volume', 'area', 'thickness', 'thinning_rate'],
+            variables=['volume', 'area', 'thinning_rate', 'runoff'],
             time_steps=np.arange(2015, 2101, 5),
-            gcm_test=gcms_mesmer[:2],
+            gcm_test=gcms_mesmer[:1],
             quantile_test=quantiles_mesmer,
             reset_files=True,
         )
 
 if is_notebook:
-    for test_scenario in scenarios_mesmer[:2]:
+    for test_scenario in scenarios_mesmer[:1]:
         aggregating_scenario(
             target_name=test_country_name,
             target_structure_dict=country_structure_dict,
@@ -156,11 +156,11 @@ if is_notebook:
             oggm_result_dir=oggm_result_dir,
             raw_oggm_output_file=raw_oggm_output_file,
             intermediate_data_folder=None,
-            variables=['volume', 'area', 'thickness', 'thinning_rate'],
+            variables=['volume', 'area', 'thinning_rate', 'runoff'],
             risk_variables=['volume', 'area'],
             risk_thresholds=np.append(np.arange(10, 91, 10), [99]),  # in % melted of 2020, 10% means 10% of 2020 melted
             time_steps=np.arange(2015, 2101, 5),
-            gcm_test=gcms_mesmer[:2],
+            gcm_test=gcms_mesmer[:1],
             quantile_test=quantiles_mesmer,
             reset_files=True,
         )
@@ -194,6 +194,12 @@ if is_notebook:
                     scenario=scenarios_mesmer[0],
                     input_dir='aggregated_data_test'
                    )
+
+if is_notebook:
+    fp_map = '/home/www/pschmitt/provide/aggregate_data/github/provide/countries/resolution_1_deg/aggregated_data_test/AUT/AUT_CurPol_map.nc'
+    fp_total = '/home/www/pschmitt/provide/aggregate_data/github/provide/countries/resolution_1_deg/aggregated_data_test/AUT/AUT_CurPol_timeseries.nc'
+    with xr.open_dataset(fp_total) as ds_test:
+        ds_test = ds_test
 
 # ### risk plot
 
@@ -248,7 +254,7 @@ if not is_notebook:
             oggm_result_dir=oggm_result_dir,
             raw_oggm_output_file=raw_oggm_output_file,
             intermediate_data_folder=aggregated_data_intermediate_outpath,
-            variables=['volume', 'area', 'thinning_rate'],
+            variables=['volume', 'area', 'thinning_rate', 'runoff'],
             #risk_variables=['volume', 'area'],
             #risk_thresholds=np.append(np.arange(10, 91, 10), [99]),  # in % melted of 2020, 10% means 10% of 2020 melted
             time_steps=np.arange(2015, 2101, 5),
@@ -258,7 +264,7 @@ if not is_notebook:
 # ## check which experiments failed for rerunning
 
 if is_notebook:
-    check_slurm_done(435063)
+    check_slurm_done(461331)
 
 if is_notebook:
     check_slurm_done(435463)

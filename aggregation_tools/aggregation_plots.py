@@ -47,8 +47,10 @@ def adjust_dataarray_for_plotting(da, delta_lat=1, delta_lon=1):
     return da
 
 
-def plot_map(target, target_name, scenario, input_dir, figsize=(12, 7),
+def plot_map(target, target_name, scenario, input_dir, resolution=None,
+             figsize=(12, 12),
              save_plot=False):
+
     # Function to adjust longitude values within a geometry
     def adjust_longitude(geometry):
         def _adjust_lon(lon, lat):
@@ -60,28 +62,39 @@ def plot_map(target, target_name, scenario, input_dir, figsize=(12, 7),
         else:
             return transform(lambda x, y: _adjust_lon(x, y), geometry)
 
-    target.loc[:, 'geometry'] = target['geometry'].apply(adjust_longitude)
-
     with xr.open_dataset(
         os.path.join(input_dir,
                      target_name,
                      f'{target_name}_{scenario}_map.nc')) as ds:
-        # if we have negative lon we convert to 0-360
-        ds['lon'] = xr.where(ds['lon'] < 0,
-                             ds['lon'] + 360,
-                             ds['lon'])
-        ds = ds.sortby('lon')
+        # if we have negative lon we convert to 0-360 and not crossing 0 degrees
+        if not np.all(np.isin([-0.5, 0.5], ds['lon'])):
+            ds['lon'] = xr.where(ds['lon'] < 0,
+                                 ds['lon'] + 360,
+                                 ds['lon'])
+            ds = ds.sortby('lon')
+
+            # also adjust geometry
+            target.loc[:, 'geometry'] = target['geometry'].apply(adjust_longitude)
         ds_plot = ds
+
+    if resolution is None:
+        resolution = ds_plot.grid_resolution
 
     times_to_show = {0: 2020, 1: 2040, 2: 2060, 3: 2080}
     cbar_labels = {'volume': 'Volume in\n% of 2020 total',
                    'area': 'Area in\n% of 2020 total',
                    'thickness': 'Thickness in m w.e.',
-                   'thinning_rate': 'Thinning Rate in\nm w.e. yr-1'}
+                   'thinning_rate': 'Thinning Rate in\nm w.e. yr-1',
+                   'runoff': 'Runoff in % of\nmean annual 2000-2019',
+                  }
     ref_values = {'volume': 'reference_2020_km3',
-                  'area': 'reference_2020_km2'}
+                  'area': 'reference_2020_km2',
+                  'runoff': 'reference_2000_2019_Mt_per_yer',
+                 }
     ref_unit = {'volume': 'km3',
-                'area': 'km2'}
+                'area': 'km2',
+                'runoff': 'Mt yr-1',
+               }
 
     fig, axs = plt.subplots(len(ds_plot.data_vars), 4, figsize=figsize)
 
@@ -99,13 +112,13 @@ def plot_map(target, target_name, scenario, input_dir, figsize=(12, 7),
                 ds_plot.loc[{'scenario': scenario,
                              'time': times_to_show[i],
                              'quantile': 0.5}][var],
-                delta_lat=ds_plot.grid_resolution,
-                delta_lon=ds_plot.grid_resolution)
+                delta_lat=resolution,
+                delta_lon=resolution)
             ).plot(
                 ax=ax, vmin=vmin, vmax=vmax, cbar_kwargs={'label': cbar_label})
             target.plot(ax=ax, facecolor='none', edgecolor='black')
             title = f'{var}\n{scenario}, Year {times_to_show[i]}'
-            if var in ['volume', 'area']:
+            if var in ['volume', 'area', 'runoff']:
                 title += f'\nref. {ds[var].attrs[ref_values[var]]:.3f} {ref_unit[var]}'
             ax.set_title(title)
     fig.suptitle(f'{target_name}')
@@ -135,11 +148,17 @@ def plot_timeseries(target_name, scenario, input_dir, figsize=(5, 9),
     ylabels = {'volume': 'Volume in % of 2020 total',
                'area': 'Area in % of 2020 total',
                'thickness': 'Thickness in m w.e.',
-               'thinning_rate': 'Thinning Rate in m w.e. yr-1'}
+               'thinning_rate': 'Thinning Rate in m w.e. yr-1',
+               'runoff': 'Runoff in % of\nmean annual 2000-2019',
+              }
     ref_values = {'volume': 'reference_2020_km3',
-                  'area': 'reference_2020_km2'}
+                  'area': 'reference_2020_km2',
+                  'runoff': 'reference_2000_2019_Mt_per_yer',
+                 }
     ref_unit = {'volume': 'km3',
-                'area': 'km2'}
+                'area': 'km2',
+                'runoff': 'Mt yr-1',
+               }
 
     fig, axs = plt.subplots(len(ds_plot.data_vars), 1, figsize=figsize)
 
@@ -156,7 +175,7 @@ def plot_timeseries(target_name, scenario, input_dir, figsize=(5, 9),
         
         ax.legend()
         title = f'{target_name}, {scenario},  {var}'
-        if var in ['volume', 'area']:
+        if var in ['volume', 'area', 'runoff']:
             title += f', ref. {ds[var].attrs[ref_values[var]]:.3f} {ref_unit[var]}'
         ax.set_title(title)
         ax.set_ylabel(ylabel)
