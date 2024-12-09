@@ -1,5 +1,7 @@
 # Aggregation of OGGM data for the PROVIDE-dashboard
 
+[![DOI](https://zenodo.org/badge/777140398.svg)](https://doi.org/10.5281/zenodo.14334377)
+
 This repository outlines the workflow for aggregating OGGM data to support the PROVIDE-dashboard, accessible [here](https://climate-risk-dashboard.climateanalytics.org/). The process involves creating a grid based on target shapes like countries, runoff-basins, or glacier regions and then mapping OGGM model outputs onto this grid. You can find the raw model output for each PROVIDE region [here](https://cluster.klima.uni-bremen.de/~lschuster/provide/MESMER-M_projections/runs/output/oggm_v16/2023.3/2100/).
 
 ![Provide glacier regions](docs/provide_regions_overview.png)
