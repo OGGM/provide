@@ -4,16 +4,11 @@ __pycache__
 .ipynb_checkpoints
 
 # do not include aggregated data to github
-countries/resolution_1_deg/aggregated_data
-countries/resolution_1_deg/aggregated_data_intermediate
-countries/resolution_1_deg/aggregated_data_test
-countries/resolution_1_deg/aggregated_result_plots
-countries/resolution_1_deg/aggregated_result_plots_test
-countries/resolution_2_5_deg/aggregated_data
-countries/resolution_2_5_deg/aggregated_data_intermediate
-countries/resolution_2_5_deg/aggregated_data_test
-countries/resolution_2_5_deg/aggregated_result_plots
-countries/resolution_2_5_deg/aggregated_result_plots_test
+aggregated_data/
+aggregated_data_intermediate/
+aggregated_data_test/
+aggregated_result_plots/
+aggregated_result_plots_test/
 
 # do not include slurm files
 slurm-*.out

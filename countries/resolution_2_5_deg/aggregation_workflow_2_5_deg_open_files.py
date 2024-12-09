@@ -208,6 +208,14 @@ if is_notebook:
 
 # ## define experiments for multiprocessing
 
+if is_notebook:
+    # Iceland test
+    #print({'201': ('ISL', 'CurPol'), '202': ('ISL', 'GS'), '203': ('ISL', 'LD'),
+    #       '204': ('ISL', 'ModAct'), '205': ('ISL', 'Ref'), '206': ('ISL', 'Ren'),
+    #       '207': ('ISL', 'Neg'), '208': ('ISL', 'SP'), '209': ('ISL', 'ssp119'),
+    #       '210': ('ISL', 'ssp534-over')})
+    print('sbatch --array=201-210 run_slurm_open_files.sh')
+
 # +
 # create dict for sbatch --array=
 slurm_arrays = {}
@@ -248,7 +256,7 @@ if not is_notebook:
             oggm_result_dir=oggm_result_dir,
             raw_oggm_output_file=raw_oggm_output_file,
             intermediate_data_folder=aggregated_data_intermediate_outpath,
-            variables=['volume', 'area', 'thinning_rate'],
+            variables=['volume', 'area', 'thinning_rate', 'runoff'],
             #risk_variables=['volume', 'area'],
             #risk_thresholds=np.append(np.arange(10, 91, 10), [99]),  # in % melted of 2020, 10% means 10% of 2020 melted
             time_steps=np.arange(2015, 2101, 5),

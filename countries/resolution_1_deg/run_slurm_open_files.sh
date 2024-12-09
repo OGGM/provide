@@ -1,12 +1,12 @@
 #!/bin/bash
 #
-# SBATCH --job-name=provide_aggregation_countries_2_5
-# SBATCH --ntasks=1
-# SBATCH --cpus-per-task=1
-# SBATCH --time=03:00:00
-# SBATCH --mail-user=patrick.schmitt@uibk.ac.at
-# SBATCH --mail-type=ALL
-# SBATCH --qos=normal
+#SBATCH --job-name=provide_aggregation_countries_1_open
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=12:00:00
+#SBATCH --mail-user=patrick.schmitt@uibk.ac.at
+#SBATCH --mail-type=ALL
+#SBATCH --qos=normal
 
 # Abort whenever a single step fails. Without this, bash will just continue on errors.
 set -e
