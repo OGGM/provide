@@ -80,7 +80,7 @@ def plot_map(target, target_name, scenario, input_dir, resolution=None,
     if resolution is None:
         resolution = ds_plot.grid_resolution
 
-    times_to_show = {0: 2020, 1: 2040, 2: 2060, 3: 2080}
+    times_to_show = {0: 2020, 1: 2040, 2: 2060, 3: 2100}
     cbar_labels = {'volume': 'Volume in\n% of 2020 total',
                    'area': 'Area in\n% of 2020 total',
                    'thickness': 'Thickness in m w.e.',

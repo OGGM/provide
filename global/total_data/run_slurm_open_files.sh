@@ -2,7 +2,7 @@
 #
 #SBATCH --job-name=provide_aggregation_global_open
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
+#SBATCH --cpus-per-task=10
 #SBATCH --time=12:00:00
 #SBATCH --mail-user=patrick.schmitt@uibk.ac.at
 #SBATCH --mail-type=ALL

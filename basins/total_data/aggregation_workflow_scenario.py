@@ -115,15 +115,15 @@ if not is_notebook:
 # ## check which experiments failed for rerunning
 
 if is_notebook:
-    check_slurm_done(465594)
+    check_slurm_done(475437)
 
 if is_notebook:
-    check_slurm_done(466404)
+    check_slurm_done(476465)
 
 if is_notebook:
-    check_slurm_done(466491)
+    check_slurm_done(476556)
 
 if is_notebook:
-    check_slurm_done(466499)
+    check_slurm_done(476580)
 
 
