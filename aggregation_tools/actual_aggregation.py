@@ -344,7 +344,7 @@ def add_runoff(ds):
 
 # # Aggregate data on maps
 
-def aggregate_data_on_map(ds_data, ds_structure):
+def aggregate_data_on_map(ds_data, ds_structure, check_last_timestep=False):
     # Create a mapping from lon, lat to rgi_id using ds_structure
     mapping_df = ds_structure.to_dataframe().reset_index().explode('rgi_ids')
     
@@ -370,6 +370,24 @@ def aggregate_data_on_map(ds_data, ds_structure):
     
     # Convert back to xarray Dataset
     ds_result = result_df.set_index(agg_dims).to_xarray()
+
+    # this is needed due to a bug when converting to xarray, the problem is
+    # that the last timestep is total nan, theirfore we set those values
+    # manually here
+    if check_last_timestep:
+        time = ds_result.time.values[-1]
+        for row in result_df[result_df.time == time].iterrows():
+            for var, value in row[1].items():
+                if var in ['lat', 'lon', 'gcm', 'scenario', 'quantile', 'time']:
+                    continue
+                ds_result[var].loc[dict(
+                    lat=row[1]['lat'],
+                    lon=row[1]['lon'],
+                    gcm=row[1]['gcm'],
+                    scenario=row[1]['scenario'],
+                    quantile=row[1]['quantile'],
+                    time=row[1]['time'],
+                )] = value
     
     # Re-add dependent coordinates
     for coord in ds_data.coords:
@@ -606,7 +624,7 @@ def use_open_mfdataset(files_to_use,
 
 
 # +
-def process_file(file_path, ds_grid_structure, variables_to_open, time_steps, add_map_data):
+def process_file(file_path, ds_grid_structure, variables_to_open, time_steps, add_map_data, check_last_timestep=False):
     """
     Processes a single file to produce aggregated map data and total data.
     """
@@ -624,7 +642,7 @@ def process_file(file_path, ds_grid_structure, variables_to_open, time_steps, ad
 
         if add_map_data:
             # Aggregate map data
-            ds_map = aggregate_data_on_map(ds, ds_grid_structure)
+            ds_map = aggregate_data_on_map(ds, ds_grid_structure, check_last_timestep=check_last_timestep)
 
             # Chunk and return
             #ds_map = ds_map.chunk({'lon': 1, 'lat': 1})
@@ -659,22 +677,28 @@ def incremental_aggregation(files_to_use,
     for i, file_path in enumerate(files_to_use):
         print(f"Processing file: {i+1}/{len(files_to_use)}")
         result = process_file(file_path, ds_grid_structure, variables_to_open,
-                              time_steps, add_map_data)
+                              time_steps, add_map_data, check_last_timestep=True)
 
         if add_map_data:
             if ds_map is None:
                 ds_map = result["map"]
+                nan_mask = xr.full_like(result["map"][variables_to_open[0]].isel(time=0), True, dtype=bool)
             else:
                 ds_map = ds_map.fillna(0) + result["map"].fillna(0)
+
+            nan_mask = np.logical_and(
+                nan_mask,
+                result["map"][variables_to_open[0]].isnull().all(dim="time")
+            )
 
         if ds_total is None:
             ds_total = result["total"]
         else:
             ds_total = ds_total.fillna(0) + result["total"].fillna(0)
-            
+
     # Add additional variables
     if add_map_data:
-        ds_map = ds_map.where(ds_map != 0)
+        ds_map = ds_map.where(~nan_mask, other=float("nan"))
         if 'volume' in variables:
             ds_map['volume'].attrs['unit'] = 'm3'
         if 'area' in variables:
